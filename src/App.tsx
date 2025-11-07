@@ -92,9 +92,14 @@ function App() {
                   </div>
                 </div>
 
-                <button className="w-full mt-8 bg-[#0e1f3e] hover:bg-[#1a2f4f] text-white font-bold text-xl py-5 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                <a
+                  href="https://buy.stripe.com/8x2eV6cWw9se7K11ObdfG03"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full mt-8 bg-[#0e1f3e] hover:bg-[#1a2f4f] text-white font-bold text-xl py-5 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg inline-block text-center"
+                >
                   Enroll Your Child Today
-                </button>
+                </a>
               </div>
             </div>
           </div>
