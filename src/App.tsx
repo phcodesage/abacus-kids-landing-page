@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import Lenis from '@studio-freight/lenis';
 import { Calculator, Clock, Calendar, Sparkles, Brain, Target, ArrowRight } from 'lucide-react';
+import Navbar from './components/Navbar';
 
 function App() {
   useEffect(() => {
@@ -43,6 +44,8 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
+      <Navbar />
+      
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0e1f3e] via-[#0e1f3e] to-[#1a2f4f]"></div>
@@ -51,7 +54,7 @@ function App() {
         <div className="absolute top-0 left-0 w-96 h-96 bg-[#ca3433]/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#ca3433]/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
 
-        <div className="relative max-w-7xl mx-auto px-6 py-16 sm:py-24 lg:py-32">
+        <div className="relative max-w-7xl mx-auto px-6 py-16 sm:py-24 lg:py-32 mt-20">
           {/* Hero Content */}
           <div className="text-center mb-16 animate-fade-in">
             <div className="flex justify-center mb-8">
@@ -99,7 +102,7 @@ function App() {
       </div>
 
       {/* Program Details Section */}
-      <div className="relative py-20 sm:py-28 bg-gradient-to-b from-white/5 to-white">
+      <div id="about" className="relative py-20 sm:py-28 bg-gradient-to-b from-white/5 to-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
             <div>
@@ -140,7 +143,7 @@ function App() {
       </div>
 
       {/* Program Details Card */}
-      <div className="relative py-20 sm:py-28 bg-white">
+      <div id="program" className="relative py-20 sm:py-28 bg-white">
         <div className="max-w-5xl mx-auto px-6">
           <div className="bg-gradient-to-br from-[#ca3433] to-[#a02828] rounded-3xl p-12 sm:p-16 shadow-2xl overflow-hidden relative">
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
@@ -199,7 +202,7 @@ function App() {
       </div>
 
       {/* Benefits Section */}
-      <div className="relative py-20 sm:py-28 bg-gradient-to-b from-white to-[#f7e0e0]">
+      <div id="benefits" className="relative py-20 sm:py-28 bg-gradient-to-b from-white to-[#f7e0e0]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="font-heading text-4xl sm:text-5xl font-black text-[#0e1f3e] mb-4">
