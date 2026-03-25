@@ -59,9 +59,6 @@ export default function Navbar() {
 
           {/* Right Section: Call & Book */}
           <div className="hidden lg:flex items-center gap-8">
-            <a href="https://buy.stripe.com/8x2eV6cWw9se7K11ObdfG03" target="_blank" rel="noopener noreferrer" className="text-[#ca3433] font-bold text-sm uppercase tracking-wider hover:underline">
-              BOOK CONSULTATION
-            </a>
             <div className="flex items-center gap-3 border-l border-gray-200 pl-8">
               <div className="bg-[#ca3433]/10 p-2 rounded-full">
                 <Phone className="w-5 h-5 text-[#ca3433]" />
@@ -91,7 +88,6 @@ export default function Navbar() {
               <a href="#program" className="text-gray-800 hover:text-[#ca3433] transition-colors font-bold uppercase text-sm py-2" onClick={() => setIsMenuOpen(false)}>Courses</a>
               <a href="#videos" className="text-gray-800 hover:text-[#ca3433] transition-colors font-bold uppercase text-sm py-2" onClick={() => setIsMenuOpen(false)}>Videos</a>
               <a href="#footer" className="text-gray-800 hover:text-[#ca3433] transition-colors font-bold uppercase text-sm py-2" onClick={() => setIsMenuOpen(false)}>Contact</a>
-              <a href="https://buy.stripe.com/8x2eV6cWw9se7K11ObdfG03" target="_blank" rel="noopener noreferrer" className="bg-[#ca3433] text-white font-bold px-6 py-3 rounded-xl transition-all duration-300 text-center" onClick={() => setIsMenuOpen(false)}>Book Consultation</a>
             </div>
           </div>
         )}
