@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        heading: ['Outfit', 'sans-serif'],
+        sans: ['Montserrat', 'Inter', 'sans-serif'],
+        heading: ['Montserrat', 'Outfit', 'sans-serif'],
       },
     },
   },

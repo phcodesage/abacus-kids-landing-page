@@ -1,18 +1,28 @@
-import { useEffect } from 'react';
-import Lenis from '@studio-freight/lenis';
-import { Calculator, Clock, Calendar, Sparkles, Brain, Target, ArrowRight } from 'lucide-react';
-import Navbar from './components/Navbar';
+import { useEffect } from "react";
+import Lenis from "@studio-freight/lenis";
+import {
+  Calculator,
+  Clock,
+  Calendar,
+  Sparkles,
+  Brain,
+  Target,
+  ArrowRight,
+  PhoneCall,
+  MapPin,
+  Mail,
+} from "lucide-react";
+import Navbar from "./components/Navbar";
 
 function App() {
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      wheelMultiplier: 1,
       touchMultiplier: 2,
       infinite: false,
     });
@@ -29,23 +39,20 @@ function App() {
     };
   }, []);
 
-  const scheduleData = [
-    {
-      day: 'Sundays',
-      time: '9:00 AM - 11:00 AM',
-      sessions: 'Sessions: 1st, 8th, 15th, 22nd',
-    },
-    {
-      day: 'Tuesdays',
-      time: '4:00 PM - 6:00 PM',
-      sessions: 'Sessions: 3rd, 10th, 17th, 24th',
-    },
+  const centerHoursData = [
+    { day: "Monday", time: "9 AM–7 PM" },
+    { day: "Tuesday", time: "9 AM–7 PM" },
+    { day: "Wednesday", time: "9 AM–7 PM" },
+    { day: "Thursday", time: "9 AM–7 PM" },
+    { day: "Friday", time: "9 AM–5 PM" },
+    { day: "Saturday", time: "Closed" },
+    { day: "Sunday", time: "9 AM–3 PM" },
   ];
 
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       <Navbar />
-      
+
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0e1f3e] via-[#0e1f3e] to-[#1a2f4f]"></div>
@@ -60,7 +67,10 @@ function App() {
             <div className="flex justify-center mb-8">
               <div className="relative">
                 <div className="absolute inset-0 bg-[#ca3433]/20 rounded-full blur-2xl"></div>
-                <Calculator className="w-20 h-20 text-[#ca3433] relative z-10" strokeWidth={1.5} />
+                <Calculator
+                  className="w-20 h-20 text-[#ca3433] relative z-10"
+                  strokeWidth={1.5}
+                />
               </div>
             </div>
             <h1 className="font-heading text-6xl sm:text-7xl lg:text-8xl font-black text-white mb-6 tracking-tighter">
@@ -74,10 +84,12 @@ function App() {
               <Sparkles className="w-5 h-5 text-[#ca3433]" />
             </div>
             <p className="text-xl sm:text-2xl lg:text-3xl text-white/90 max-w-4xl mx-auto leading-relaxed font-light mb-8">
-              Watch your child's brain light up as they master numbers using the ancient power of the abacus!
+              Watch your child's brain light up as they master numbers using the
+              ancient power of the abacus!
             </p>
             <p className="text-base sm:text-lg text-white/70 max-w-3xl mx-auto mb-12">
-              Lightning-fast calculations • Enhanced memory • Unshakeable confidence
+              Lightning-fast calculations • Enhanced memory • Unshakeable
+              confidence
             </p>
           </div>
 
@@ -91,8 +103,9 @@ function App() {
                   alt="Children learning with abacus"
                   className="w-full h-auto object-cover rounded-2xl"
                   onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                    e.currentTarget.parentElement!.innerHTML = '<div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm p-24 text-center rounded-2xl"><p class="text-white/60 text-lg">Add your hero image to /public/images/hero-image.jpg</p></div>';
+                    e.currentTarget.style.display = "none";
+                    e.currentTarget.parentElement!.innerHTML =
+                      '<div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm p-24 text-center rounded-2xl"><p class="text-white/60 text-lg">Add your hero image to /public/images/hero-image.jpg</p></div>';
                   }}
                 />
               </div>
@@ -102,7 +115,10 @@ function App() {
       </div>
 
       {/* Program Details Section */}
-      <div id="about" className="relative py-20 sm:py-28 bg-gradient-to-b from-white/5 to-white">
+      <div
+        id="about"
+        className="relative py-20 sm:py-28 bg-gradient-to-b from-white/5 to-white"
+      >
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
             <div>
@@ -110,32 +126,52 @@ function App() {
                 Unlock Your Child's Potential
               </h2>
               <p className="text-lg text-[#0e1f3e]/80 leading-relaxed mb-6">
-                Through hands-on practice and visual techniques, kids develop lightning-fast calculation skills, boost concentration, and strengthen memory—all while having fun.
+                Through hands-on practice and visual techniques, kids develop
+                lightning-fast calculation skills, boost concentration, and
+                strengthen memory—all while having fun.
               </p>
               <p className="text-lg text-[#0e1f3e]/80 leading-relaxed">
-                Our abacus program turns math into a mental workout, building confidence and cognitive agility that goes far beyond the classroom.
+                Our abacus program turns math into a mental workout, building
+                confidence and cognitive agility that goes far beyond the
+                classroom.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-6">
               <div className="bg-gradient-to-br from-[#ca3433]/10 to-[#ca3433]/5 rounded-2xl p-8 border border-[#ca3433]/20 hover:border-[#ca3433]/40 transition-all duration-300">
                 <Brain className="w-12 h-12 text-[#ca3433] mb-4" />
-                <h3 className="font-heading text-xl font-bold text-[#0e1f3e] mb-2">Enhanced Memory</h3>
-                <p className="text-sm text-[#0e1f3e]/70">Strengthen cognitive abilities and concentration</p>
+                <h3 className="font-heading text-xl font-bold text-[#0e1f3e] mb-2">
+                  Enhanced Memory
+                </h3>
+                <p className="text-sm text-[#0e1f3e]/70">
+                  Strengthen cognitive abilities and concentration
+                </p>
               </div>
               <div className="bg-gradient-to-br from-[#ca3433]/10 to-[#ca3433]/5 rounded-2xl p-8 border border-[#ca3433]/20 hover:border-[#ca3433]/40 transition-all duration-300">
                 <Sparkles className="w-12 h-12 text-[#ca3433] mb-4" />
-                <h3 className="font-heading text-xl font-bold text-[#0e1f3e] mb-2">Lightning-Fast Skills</h3>
-                <p className="text-sm text-[#0e1f3e]/70">Master mental math with incredible speed</p>
+                <h3 className="font-heading text-xl font-bold text-[#0e1f3e] mb-2">
+                  Lightning-Fast Skills
+                </h3>
+                <p className="text-sm text-[#0e1f3e]/70">
+                  Master mental math with incredible speed
+                </p>
               </div>
               <div className="bg-gradient-to-br from-[#ca3433]/10 to-[#ca3433]/5 rounded-2xl p-8 border border-[#ca3433]/20 hover:border-[#ca3433]/40 transition-all duration-300">
                 <Target className="w-12 h-12 text-[#ca3433] mb-4" />
-                <h3 className="font-heading text-xl font-bold text-[#0e1f3e] mb-2">Build Confidence</h3>
-                <p className="text-sm text-[#0e1f3e]/70">Excel in academics with proven abilities</p>
+                <h3 className="font-heading text-xl font-bold text-[#0e1f3e] mb-2">
+                  Build Confidence
+                </h3>
+                <p className="text-sm text-[#0e1f3e]/70">
+                  Excel in academics with proven abilities
+                </p>
               </div>
               <div className="bg-gradient-to-br from-[#ca3433]/10 to-[#ca3433]/5 rounded-2xl p-8 border border-[#ca3433]/20 hover:border-[#ca3433]/40 transition-all duration-300">
                 <Calculator className="w-12 h-12 text-[#ca3433] mb-4" />
-                <h3 className="font-heading text-xl font-bold text-[#0e1f3e] mb-2">Problem Solving</h3>
-                <p className="text-sm text-[#0e1f3e]/70">Develop critical thinking skills</p>
+                <h3 className="font-heading text-xl font-bold text-[#0e1f3e] mb-2">
+                  Problem Solving
+                </h3>
+                <p className="text-sm text-[#0e1f3e]/70">
+                  Develop critical thinking skills
+                </p>
               </div>
             </div>
           </div>
@@ -155,13 +191,30 @@ function App() {
 
               <div className="space-y-8 mb-12">
                 {/* Price */}
-                <div className="flex items-start gap-6 pb-8 border-b border-white/20">
-                  <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center flex-shrink-0">
-                    <span className="text-3xl font-black">$</span>
+                <div className="flex flex-col items-center gap-6 pb-8 border-b border-white/20">
+                  <div className="flex items-start gap-6 w-full">
+                    <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center flex-shrink-0">
+                      <span className="text-3xl font-black">$</span>
+                    </div>
+                    <div>
+                      <p className="font-heading text-4xl font-black text-white mb-1">
+                        $350/month
+                      </p>
+                      <p className="text-white/90 text-lg">
+                        Investment in your child's future
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-heading text-4xl font-black text-white mb-1">$350/month</p>
-                    <p className="text-white/90 text-lg">Investment in your child's future</p>
+                  <div className="w-full flex justify-center p-4">
+                    <a
+                      href="https://buy.stripe.com/8x2eV6cWw9se7K11ObdfG03"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-heading inline-flex items-center justify-center gap-3 bg-[#ca3433] hover:bg-[#a02828] text-white font-black text-lg py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg group w-full sm:w-auto sm:min-w-[200px]"
+                    >
+                      ENROLL NOW
+                      <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                    </a>
                   </div>
                 </div>
 
@@ -171,71 +224,128 @@ function App() {
                     <Clock className="w-8 h-8" />
                   </div>
                   <div>
-                    <p className="font-heading text-2xl font-black text-white mb-1">2 hours per week</p>
-                    <p className="text-white/90 text-lg">Focused learning sessions</p>
+                    <p className="font-heading text-2xl font-black text-white mb-1">
+                      2 hours per week
+                    </p>
+                    <p className="text-white/90 text-lg">
+                      Focused learning sessions
+                    </p>
                   </div>
                 </div>
 
-                {/* Schedule */}
+                {/* Center Hours */}
                 <div className="flex items-start gap-6">
                   <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center flex-shrink-0">
                     <Calendar className="w-8 h-8" />
                   </div>
                   <div className="flex-1">
-                    <p className="font-heading text-2xl font-black text-white mb-4">Class Schedule</p>
-                    <div className="space-y-3">
-                      {scheduleData.map((schedule, idx) => (
-                        <div key={idx} className="bg-white/10 backdrop-blur-sm rounded-xl px-6 py-4 border border-white/20 hover:bg-white/15 transition-all duration-300">
-                          <p className="font-bold text-white text-lg mb-1">{schedule.day}</p>
-                          <p className="text-white/95 font-semibold">{schedule.time}</p>
-                          <p className="text-white/80 text-sm mt-2">{schedule.sessions}</p>
-                        </div>
-                      ))}
-                    </div>
+                    <section aria-label="Center opening hours">
+                      <p className="font-heading text-2xl font-black text-white mb-4">
+                        Center Hours
+                      </p>
+                      <ul className="space-y-2 text-white text-base leading-[1.5]">
+                        {centerHoursData.map((item, idx) => (
+                          <li key={idx} className="flex justify-between max-w-[250px]">
+                            <span>{item.day}</span>
+                            <span className={item.time === "Closed" ? "text-[#6c757d]" : ""}>
+                              {item.time}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
       </div>
 
       {/* Benefits Section */}
-      <div id="benefits" className="relative py-20 sm:py-28 bg-gradient-to-b from-white to-[#f7e0e0]">
+      <div
+        id="benefits"
+        className="relative py-20 sm:py-28 bg-gradient-to-b from-white to-[#f7e0e0]"
+      >
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="font-heading text-4xl sm:text-5xl font-black text-[#0e1f3e] mb-4">
               Why Choose Our Abacus Program?
             </h2>
             <p className="text-xl text-[#0e1f3e]/70 max-w-2xl mx-auto">
-              Proven methods that develop mental math mastery and cognitive excellence
+              Proven methods that develop mental math mastery and cognitive
+              excellence
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#ca3433]/10 hover:border-[#ca3433]/30">
-              <div className="w-14 h-14 bg-gradient-to-br from-[#ca3433] to-[#a02828] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <span className="text-2xl">⚡</span>
+            <div className="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col">
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <img src="/images/hero-image.jpg" alt="Abacus Mental Math" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute bottom-0 right-6 translate-y-1/2 bg-[#ca3433] p-4 rounded-lg shadow-lg">
+                  <Calculator className="w-6 h-6 text-white" />
+                </div>
               </div>
-              <h3 className="font-heading text-2xl font-bold text-[#0e1f3e] mb-3">Lightning-Fast Calculations</h3>
-              <p className="text-[#0e1f3e]/70 leading-relaxed">Master mental math calculations with incredible speed and accuracy that amazes teachers and peers alike.</p>
+              <div className="p-8 pt-12 flex-1 flex flex-col">
+                <h3 className="font-heading text-2xl font-bold text-[#0e1f3e] mb-4">
+                  Abacus Mental Math
+                </h3>
+                <p className="text-[#0e1f3e]/70 leading-relaxed mb-6 flex-1">
+                  Unleash the power of the mind with our Abacus Mental Math program. Designed to enhance cognitive skills and mathematical abilities, this engaging and proven method is suitable for students of all ages.
+                </p>
+                <a href="#" className="inline-flex items-center gap-2 text-[#ca3433] font-bold hover:underline group/link">
+                  <div className="bg-[#ca3433] rounded-full p-1 text-white group-hover/link:scale-110 transition-transform">
+                    <ArrowRight className="w-3 h-3" />
+                  </div>
+                  Learn More
+                </a>
+              </div>
             </div>
 
-            <div className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#ca3433]/10 hover:border-[#ca3433]/30">
-              <div className="w-14 h-14 bg-gradient-to-br from-[#ca3433] to-[#a02828] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <span className="text-2xl">🧠</span>
+            <div className="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col">
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <img src="/images/hero-image.jpg" alt="After School Programs" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute bottom-0 right-6 translate-y-1/2 bg-[#ca3433] p-4 rounded-lg shadow-lg">
+                  <Brain className="w-6 h-6 text-white" />
+                </div>
               </div>
-              <h3 className="font-heading text-2xl font-bold text-[#0e1f3e] mb-3">Enhanced Memory & Focus</h3>
-              <p className="text-[#0e1f3e]/70 leading-relaxed">Strengthen cognitive abilities, boost concentration, and develop photographic memory through proven abacus techniques.</p>
+              <div className="p-8 pt-12 flex-1 flex flex-col">
+                <h3 className="font-heading text-2xl font-bold text-[#0e1f3e] mb-4">
+                  After School Programs K-5
+                </h3>
+                <p className="text-[#0e1f3e]/70 leading-relaxed mb-6 flex-1">
+                  Our after-school programs provide a nurturing environment for elementary school students (K-5) to reinforce their academic foundation, explore creative pursuits, & develop essential life skills in a supportive community setting.
+                </p>
+                <a href="#" className="inline-flex items-center gap-2 text-[#ca3433] font-bold hover:underline group/link">
+                  <div className="bg-[#ca3433] rounded-full p-1 text-white group-hover/link:scale-110 transition-transform">
+                    <ArrowRight className="w-3 h-3" />
+                  </div>
+                  Learn More
+                </a>
+              </div>
             </div>
 
-            <div className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#ca3433]/10 hover:border-[#ca3433]/30">
-              <div className="w-14 h-14 bg-gradient-to-br from-[#ca3433] to-[#a02828] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <span className="text-2xl">🎯</span>
+            <div className="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col">
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <img src="/images/hero-image.jpg" alt="Adult Workshops" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute bottom-0 right-6 translate-y-1/2 bg-[#ca3433] p-4 rounded-lg shadow-lg">
+                  <Target className="w-6 h-6 text-white" />
+                </div>
               </div>
-              <h3 className="font-heading text-2xl font-bold text-[#0e1f3e] mb-3">Academic Excellence</h3>
-              <p className="text-[#0e1f3e]/70 leading-relaxed">Build unshakeable confidence and problem-solving abilities that translate to success across all academic subjects.</p>
+              <div className="p-8 pt-12 flex-1 flex flex-col">
+                <h3 className="font-heading text-2xl font-bold text-[#0e1f3e] mb-4">
+                  Adult Workshops
+                </h3>
+                <p className="text-[#0e1f3e]/70 leading-relaxed mb-6 flex-1">
+                  Learning is a lifelong journey, and our adult workshops cater to individuals seeking to expand their knowledge base. Whether you're looking to acquire new skills, our workshops offer a diverse array of learning opportunities.
+                </p>
+                <a href="#" className="inline-flex items-center gap-2 text-[#ca3433] font-bold hover:underline group/link">
+                  <div className="bg-[#ca3433] rounded-full p-1 text-white group-hover/link:scale-110 transition-transform">
+                    <ArrowRight className="w-3 h-3" />
+                  </div>
+                  Learn More
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -251,7 +361,8 @@ function App() {
             Ready to Transform Your Child's Future?
           </h2>
           <p className="text-xl text-white/80 mb-12 max-w-2xl mx-auto">
-            Join our exclusive abacus program and watch your child develop extraordinary mental math skills and unshakeable confidence.
+            Join our exclusive abacus program and watch your child develop
+            extraordinary mental math skills and unshakeable confidence.
           </p>
           <a
             href="https://buy.stripe.com/8x2eV6cWw9se7K11ObdfG03"
@@ -265,9 +376,100 @@ function App() {
         </div>
       </div>
 
+      {/* Abacus Videos Section */}
+      <div id="videos" className="py-20 sm:py-28 bg-[#f8f9fa]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="font-heading text-4xl sm:text-5xl font-black text-[#0e1f3e] mb-4">
+              Abacus Videos
+            </h2>
+            <p className="text-xl text-[#0e1f3e]/70 max-w-2xl mx-auto font-medium">
+              See our students in action and learn about the benefits of abacus training.
+            </p>
+          </div>
+
+          <div className="flex justify-center">
+            <div className="w-full max-w-5xl">
+              {[
+                { id: "GM0-cSfzSSU", title: "Boosts Mental Math Skills | Abacus Benefits" },
+              ].map((video) => (
+                <div key={video.id} className="relative group">
+                  <div className="aspect-video rounded-3xl overflow-hidden shadow-2xl bg-white border-8 border-white">
+                    <iframe
+                      className="w-full h-full"
+                      src={`https://www.youtube.com/embed/${video.id}`}
+                      title={video.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      loading="lazy"
+                    ></iframe>
+                  </div>
+                  <noscript>
+                    <p className="mt-4 text-sm text-gray-500 text-center font-medium">
+                      Your browser blocks third-party cookies. Please enable them to view this video.
+                    </p>
+                  </noscript>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Footer */}
-      <div className="bg-[#0e1f3e] text-white/70 py-8 text-center">
-        <p>© 2024 Abacus Program. All rights reserved.</p>
+      <div id="footer" className="bg-[#0e1f3e] text-white py-12">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Phone Number */}
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-[#ca3433] flex items-center justify-center border-4 border-white/10 shrink-0 shadow-lg">
+                <PhoneCall className="w-8 h-8 text-white" />
+              </div>
+              <div>
+                <p className="text-xs font-black uppercase tracking-widest text-white mb-1">PHONE NUMBER:</p>
+                <a href="tel:+15162263114" className="text-lg font-bold hover:text-[#ca3433] transition-colors tracking-tight">+1 (516) 226-3114</a>
+              </div>
+            </div>
+
+            {/* Our Location */}
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-[#ca3433] flex items-center justify-center border-4 border-white/10 shrink-0 shadow-lg">
+                <MapPin className="w-8 h-8 text-white" />
+              </div>
+              <div>
+                <p className="text-xs font-black uppercase tracking-widest text-white mb-1">OUR LOCATION:</p>
+                <a 
+                  href="https://www.google.com/maps/search/?api=1&query=1360+Willis+Ave,+Albertson,+NY+11507" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-lg font-bold hover:text-[#ca3433] transition-colors tracking-tight"
+                >
+                  1360 Willis Ave., Albertson NY 11507
+                </a>
+              </div>
+            </div>
+
+            {/* Email Address */}
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-[#ca3433] flex items-center justify-center border-4 border-white/10 shrink-0 shadow-lg">
+                <Mail className="w-8 h-8 text-white" />
+              </div>
+              <div>
+                <p className="text-xs font-black uppercase tracking-widest text-white mb-1">EMAIL ADDRESS:</p>
+                <a 
+                  href="mailto:Abacus@exceedlearningcenterny.com?subject=Abacus Inquiry" 
+                  className="text-lg font-bold hover:text-[#ca3433] transition-colors underline decoration-1 underline-offset-4 tracking-tight"
+                >
+                  Email us directly [+]
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-12 pt-8 border-t border-white/10 text-center text-white/50 text-sm">
+            <p>© 2024 Abacus Program. All rights reserved.</p>
+          </div>
+        </div>
       </div>
     </div>
   );
