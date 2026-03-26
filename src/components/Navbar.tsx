@@ -21,11 +21,11 @@ export default function Navbar() {
         <div className="flex items-center gap-6">
           <span className="text-gray-400">Follow us on Social Media</span>
           <div className="flex items-center gap-4">
-            <a href="#" className="hover:text-[#ca3433] transition-colors"><Facebook className="w-4 h-4" /></a>
-            <a href="#" className="hover:text-[#ca3433] transition-colors"><Linkedin className="w-4 h-4" /></a>
-            <a href="#" className="hover:text-[#ca3433] transition-colors"><Instagram className="w-4 h-4" /></a>
-            <a href="#" className="hover:text-[#ca3433] transition-colors"><Youtube className="w-4 h-4" /></a>
-            <a href="#" className="hover:text-[#ca3433] transition-colors font-bold text-lg">G</a>
+            <a href="https://www.facebook.com/ExceedLearningCenter" target="_blank" rel="noopener noreferrer" className="hover:text-[#ca3433] transition-colors"><Facebook className="w-4 h-4" /></a>
+            <a href="https://www.linkedin.com/company/exceed-learning-center-ny/" target="_blank" rel="noopener noreferrer" className="hover:text-[#ca3433] transition-colors"><Linkedin className="w-4 h-4" /></a>
+            <a href="https://www.instagram.com/exceed_learning_center/" target="_blank" rel="noopener noreferrer" className="hover:text-[#ca3433] transition-colors"><Instagram className="w-4 h-4" /></a>
+            <a href="https://www.youtube.com/@ExceedLearningCenterNY" target="_blank" rel="noopener noreferrer" className="hover:text-[#ca3433] transition-colors"><Youtube className="w-4 h-4" /></a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Exceed+Learning+Center+Albertson+NY" target="_blank" rel="noopener noreferrer" className="hover:text-[#ca3433] transition-colors font-bold text-lg">G</a>
           </div>
         </div>
       </div>

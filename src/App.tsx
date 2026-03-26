@@ -391,13 +391,13 @@ function App() {
           <div className="flex justify-center">
             <div className="w-full max-w-5xl">
               {[
-                { id: "GM0-cSfzSSU", title: "Boosts Mental Math Skills | Abacus Benefits" },
+                  { id: "G921Q3E4E9s", title: "Exceed Learning Center Video", start: 2 },
               ].map((video) => (
                 <div key={video.id} className="relative group">
                   <div className="aspect-video rounded-3xl overflow-hidden shadow-2xl bg-white border-8 border-white">
                     <iframe
                       className="w-full h-full"
-                      src={`https://www.youtube.com/embed/${video.id}`}
+                        src={`https://www.youtube.com/embed/${video.id}${video.start ? `?start=${video.start}` : ''}`}
                       title={video.title}
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
