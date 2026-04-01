@@ -13,9 +13,9 @@ export default function Navbar() {
             <MapPin className="w-4 h-4 text-[#ca3433]" />
             1360 Willis Ave, Albertson, NY 11507
           </a>
-          <a href="mailto:Abacus@exceedlearningcenterny.com" className="flex items-center gap-2 hover:text-[#ca3433] transition-colors">
+          <a href="mailto:programs@exceedlearningcenterny.com" className="flex items-center gap-2 hover:text-[#ca3433] transition-colors">
             <Mail className="w-4 h-4 text-[#ca3433]" />
-            Email us Directly [+]
+            programs@exceedlearningcenterny.com
           </a>
         </div>
         <div className="flex items-center gap-6">
@@ -33,13 +33,13 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-24">
           {/* Logo */}
-          <div className="flex items-center gap-2">
+          <a href="#" className="flex items-center gap-2">
             <img 
               src="/exceed-logo.png" 
               alt="Exceed Learning Center Logo" 
               className="h-16 w-auto"
             />
-          </div>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">

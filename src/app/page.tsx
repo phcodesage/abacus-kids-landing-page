@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
 import {
   Calculator,
@@ -12,10 +12,33 @@ import {
   PhoneCall,
   MapPin,
   Mail,
+  ChevronUp,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 
 function App() {
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 400) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -435,10 +458,10 @@ function App() {
               <div>
                 <p className="text-xs font-black uppercase tracking-widest text-white mb-1">EMAIL ADDRESS:</p>
                 <a 
-                  href="mailto:Abacus@exceedlearningcenterny.com?subject=Abacus Inquiry" 
+                  href="mailto:programs@exceedlearningcenterny.com?subject=Abacus Inquiry" 
                   className="text-lg font-bold hover:text-[#ca3433] transition-colors underline decoration-1 underline-offset-4 tracking-tight"
                 >
-                  Email us directly [+]
+                  programs@exceedlearningcenterny.com
                 </a>
               </div>
             </div>
@@ -467,6 +490,17 @@ function App() {
           </div>
         </div>
       </div>
+
+      {/* Scroll to Top Button */}
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-8 right-8 z-50 p-3 rounded-full bg-[#ca3433] text-white shadow-2xl transition-all duration-300 hover:scale-110 hover:bg-[#a02828] ${
+          showScrollTop ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
+        }`}
+        aria-label="Scroll to top"
+      >
+        <ChevronUp className="w-5 h-5" />
+      </button>
     </div>
   );
 }
