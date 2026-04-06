@@ -458,10 +458,10 @@ function App() {
               <div>
                 <p className="text-xs font-black uppercase tracking-widest text-white mb-1">EMAIL ADDRESS:</p>
                 <a 
-                  href="mailto:programs@exceedlearningcenterny.com?subject=Abacus Inquiry" 
+                  href="mailto:kidsprograms@exceedlearningcenterny.com?subject=Abacus Inquiry" 
                   className="text-lg font-bold hover:text-[#ca3433] transition-colors underline decoration-1 underline-offset-4 tracking-tight"
                 >
-                  programs@exceedlearningcenterny.com
+                  kidsprograms@exceedlearningcenterny.com
                 </a>
               </div>
             </div>
