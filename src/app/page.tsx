@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Lenis from "@studio-freight/lenis";
 import {
   Calculator,
@@ -15,28 +15,27 @@ import {
   ChevronUp,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
+import PaymentModal, { calcCardPrice } from "./PaymentModal";
 
 function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const STRIPE_LINK = "https://buy.stripe.com/8x2eV6cWw9se7K11ObdfG03";
+  const CASH_PRICE = "$350";
+
+  // Store Lenis instance so PaymentModal can stop/start it
+  const lenisRef = useRef<{ stop: () => void; start: () => void } | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 400) {
-        setShowScrollTop(true);
-      } else {
-        setShowScrollTop(false);
-      }
+      setShowScrollTop(window.scrollY > 400);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -51,15 +50,18 @@ function App() {
       infinite: false,
     });
 
+    // Expose stop/start to modal via ref
+    lenisRef.current = lenis;
+
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
-
     requestAnimationFrame(raf);
 
     return () => {
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, []);
 
@@ -75,6 +77,15 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
+      <PaymentModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        courseName="Abacus Program"
+        cashPrice={CASH_PRICE}
+        cardPrice={calcCardPrice(CASH_PRICE)}
+        stripeLink={STRIPE_LINK}
+        lenisRef={lenisRef}
+      />
       <Navbar />
 
       {/* Hero Section */}
@@ -108,7 +119,7 @@ function App() {
               <Sparkles className="w-5 h-5 text-[#ca3433]" />
             </div>
             <p className="text-xl sm:text-2xl lg:text-3xl text-white/90 max-w-4xl mx-auto leading-relaxed font-light mb-8">
-              Watch your child's brain light up as they master numbers using the
+              Watch your child&apos;s brain light up as they master numbers using the
               ancient power of the abacus!
             </p>
             <p className="text-base sm:text-lg text-white/70 max-w-3xl mx-auto mb-12">
@@ -147,7 +158,7 @@ function App() {
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
             <div>
               <h2 className="font-heading text-4xl sm:text-5xl font-black text-[#0e1f3e] mb-6">
-                Unlock Your Child's Potential
+                Unlock Your Child&apos;s Potential
               </h2>
               <p className="text-lg text-[#0e1f3e]/80 leading-relaxed mb-6">
                 Through hands-on practice and visual techniques, kids develop
@@ -225,20 +236,18 @@ function App() {
                         $350/month
                       </p>
                       <p className="text-white/90 text-lg">
-                        Investment in your child's future
+                        Investment in your child&apos;s future
                       </p>
                     </div>
                   </div>
                   <div className="w-full flex justify-center p-4">
-                    <a
-                      href="https://buy.stripe.com/8x2eV6cWw9se7K11ObdfG03"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-heading inline-flex items-center justify-center gap-3 bg-[#ca3433] hover:bg-[#a02828] text-white font-black text-lg py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg group w-full sm:w-auto sm:min-w-[200px]"
+                    <button
+                      onClick={() => setModalOpen(true)}
+                      className="font-heading inline-flex items-center justify-center gap-3 bg-white text-[#ca3433] font-black text-lg py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg group w-full sm:w-auto sm:min-w-[200px] hover:bg-white/90"
                     >
-                      ENROLL NOW
+                      ENROLL NOW — CHOOSE PAYMENT
                       <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-                    </a>
+                    </button>
                   </div>
                 </div>
 
@@ -256,7 +265,6 @@ function App() {
                     </p>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -315,7 +323,7 @@ function App() {
                   After School Programs K-5
                 </h3>
                 <p className="text-[#0e1f3e]/70 leading-relaxed mb-6 flex-1">
-                  Our after-school programs provide a nurturing environment for elementary school students (K-5) to reinforce their academic foundation, explore creative pursuits, & develop essential life skills in a supportive community setting.
+                  Our after-school programs provide a nurturing environment for elementary school students (K-5) to reinforce their academic foundation, explore creative pursuits, &amp; develop essential life skills in a supportive community setting.
                 </p>
                 <a href="#" className="inline-flex items-center gap-2 text-[#ca3433] font-bold hover:underline group/link">
                   <div className="bg-[#ca3433] rounded-full p-1 text-white group-hover/link:scale-110 transition-transform">
@@ -338,7 +346,7 @@ function App() {
                   Adult Workshops
                 </h3>
                 <p className="text-[#0e1f3e]/70 leading-relaxed mb-6 flex-1">
-                  Learning is a lifelong journey, and our adult workshops cater to individuals seeking to expand their knowledge base. Whether you're looking to acquire new skills, our workshops offer a diverse array of learning opportunities.
+                  Learning is a lifelong journey, and our adult workshops cater to individuals seeking to expand their knowledge base. Whether you&apos;re looking to acquire new skills, our workshops offer a diverse array of learning opportunities.
                 </p>
                 <a href="#" className="inline-flex items-center gap-2 text-[#ca3433] font-bold hover:underline group/link">
                   <div className="bg-[#ca3433] rounded-full p-1 text-white group-hover/link:scale-110 transition-transform">
@@ -359,21 +367,19 @@ function App() {
 
         <div className="relative max-w-4xl mx-auto px-6 text-center">
           <h2 className="font-heading text-4xl sm:text-5xl font-black text-white mb-6">
-            Ready to Transform Your Child's Future?
+            Ready to Transform Your Child&apos;s Future?
           </h2>
           <p className="text-xl text-white/80 mb-12 max-w-2xl mx-auto">
             Join our exclusive abacus program and watch your child develop
             extraordinary mental math skills and unshakeable confidence.
           </p>
-          <a
-            href="https://buy.stripe.com/8x2eV6cWw9se7K11ObdfG03"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => setModalOpen(true)}
             className="font-heading inline-flex items-center gap-3 bg-[#ca3433] hover:bg-[#a02828] text-white font-black text-lg py-6 px-10 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg group"
           >
-            Enroll Now
+            Enroll Now — Choose Payment
             <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-          </a>
+          </button>
         </div>
       </div>
 
@@ -392,13 +398,13 @@ function App() {
           <div className="flex justify-center">
             <div className="w-full max-w-5xl">
               {[
-                  { id: "G921Q3E4E9s", title: "Exceed Learning Center Video", start: 2 },
+                { id: "G921Q3E4E9s", title: "Exceed Learning Center Video", start: 2 },
               ].map((video) => (
                 <div key={video.id} className="relative group">
                   <div className="aspect-video rounded-3xl overflow-hidden shadow-2xl bg-white border-8 border-white">
                     <iframe
                       className="w-full h-full"
-                        src={`https://www.youtube.com/embed/${video.id}${video.start ? `?start=${video.start}` : ''}`}
+                      src={`https://www.youtube.com/embed/${video.id}${video.start ? `?start=${video.start}` : ""}`}
                       title={video.title}
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
@@ -439,10 +445,10 @@ function App() {
               </div>
               <div>
                 <p className="text-xs font-black uppercase tracking-widest text-white mb-1">OUR LOCATION:</p>
-                <a 
-                  href="https://www.google.com/maps/search/?api=1&query=1360+Willis+Ave,+Albertson,+NY+11507" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=1360+Willis+Ave,+Albertson,+NY+11507"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-lg font-bold hover:text-[#ca3433] transition-colors tracking-tight"
                 >
                   1360 Willis Ave., Albertson NY 11507
@@ -457,8 +463,8 @@ function App() {
               </div>
               <div>
                 <p className="text-xs font-black uppercase tracking-widest text-white mb-1">EMAIL ADDRESS:</p>
-                <a 
-                  href="mailto:kidsprograms@exceedlearningcenterny.com?subject=Abacus Inquiry" 
+                <a
+                  href="mailto:kidsprograms@exceedlearningcenterny.com?subject=Abacus Inquiry"
                   className="text-lg font-bold hover:text-[#ca3433] transition-colors underline decoration-1 underline-offset-4 tracking-tight"
                 >
                   kidsprograms@exceedlearningcenterny.com
@@ -466,7 +472,7 @@ function App() {
               </div>
             </div>
           </div>
-          
+
           <div className="mt-12 pt-8 border-t border-white/10">
             <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6 mb-8">
               <div className="w-16 h-16 rounded-full bg-[#ca3433] flex items-center justify-center border-4 border-white/10 shrink-0 shadow-lg">
@@ -506,4 +512,3 @@ function App() {
 }
 
 export default App;
-
