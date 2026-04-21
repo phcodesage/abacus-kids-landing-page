@@ -130,7 +130,7 @@ export default function PaymentModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
       style={{ animation: "fadeIn 0.2s ease" }}
       onClick={(e) => e.target === e.currentTarget && handleClose()}
     >
@@ -171,6 +171,7 @@ export default function PaymentModal({
 
         {/* Scrollable body — data-lenis-prevent tells Lenis to ignore scroll events here */}
         <div
+          key={step}
           className="p-6 overflow-y-auto flex-1"
           data-lenis-prevent
           style={{ overscrollBehavior: "contain" }}
