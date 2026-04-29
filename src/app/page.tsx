@@ -24,7 +24,7 @@ function App() {
   const CASH_PRICE = "$350";
 
   // Store Lenis instance so PaymentModal can stop/start it
-  const lenisRef = useRef<{ stop: () => void; start: () => void } | null>(null);
+  const lenisRef = useRef<{ stop: () => void; start: () => void; scrollTo: (target: number, options?: Record<string, unknown>) => void } | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
