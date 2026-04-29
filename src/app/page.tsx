@@ -35,7 +35,7 @@ function App() {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    lenisRef.current?.scrollTo(0, { immediate: false });
   };
 
   useEffect(() => {
@@ -144,6 +144,46 @@ function App() {
                   }}
                 />
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Abacus Videos Section */}
+      <div id="videos" className="py-20 sm:py-28 bg-[#f8f9fa]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="font-heading text-4xl sm:text-5xl font-black text-[#0e1f3e] mb-4">
+              Abacus Videos
+            </h2>
+            <p className="text-xl text-[#0e1f3e]/70 max-w-2xl mx-auto font-medium">
+              See our students in action and learn about the benefits of abacus training.
+            </p>
+          </div>
+
+          <div className="flex justify-center">
+            <div className="w-full max-w-5xl">
+              {[
+                { id: "G921Q3E4E9s", title: "Exceed Learning Center Video", start: 2 },
+              ].map((video) => (
+                <div key={video.id} className="relative group">
+                  <div className="aspect-video rounded-3xl overflow-hidden shadow-2xl bg-white border-8 border-white">
+                    <iframe
+                      className="w-full h-full"
+                      src={`https://www.youtube.com/embed/${video.id}${video.start ? `?start=${video.start}` : ""}`}
+                      title={video.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      loading="lazy"
+                    ></iframe>
+                  </div>
+                  <noscript>
+                    <p className="mt-4 text-sm text-gray-500 text-center font-medium">
+                      Your browser blocks third-party cookies. Please enable them to view this video.
+                    </p>
+                  </noscript>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -334,28 +374,6 @@ function App() {
               </div>
             </div>
 
-            <div className="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col">
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <img src="/images/hero-image.jpg" alt="Adult Workshops" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                <div className="absolute bottom-0 right-6 translate-y-1/2 bg-[#ca3433] p-4 rounded-lg shadow-lg">
-                  <Target className="w-6 h-6 text-white" />
-                </div>
-              </div>
-              <div className="p-8 pt-12 flex-1 flex flex-col">
-                <h3 className="font-heading text-2xl font-bold text-[#0e1f3e] mb-4">
-                  Adult Workshops
-                </h3>
-                <p className="text-[#0e1f3e]/70 leading-relaxed mb-6 flex-1">
-                  Learning is a lifelong journey, and our adult workshops cater to individuals seeking to expand their knowledge base. Whether you&apos;re looking to acquire new skills, our workshops offer a diverse array of learning opportunities.
-                </p>
-                <a href="#" className="inline-flex items-center gap-2 text-[#ca3433] font-bold hover:underline group/link">
-                  <div className="bg-[#ca3433] rounded-full p-1 text-white group-hover/link:scale-110 transition-transform">
-                    <ArrowRight className="w-3 h-3" />
-                  </div>
-                  Learn More
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -380,46 +398,6 @@ function App() {
             Enroll Now — Choose Payment
             <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
           </button>
-        </div>
-      </div>
-
-      {/* Abacus Videos Section */}
-      <div id="videos" className="py-20 sm:py-28 bg-[#f8f9fa]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="font-heading text-4xl sm:text-5xl font-black text-[#0e1f3e] mb-4">
-              Abacus Videos
-            </h2>
-            <p className="text-xl text-[#0e1f3e]/70 max-w-2xl mx-auto font-medium">
-              See our students in action and learn about the benefits of abacus training.
-            </p>
-          </div>
-
-          <div className="flex justify-center">
-            <div className="w-full max-w-5xl">
-              {[
-                { id: "G921Q3E4E9s", title: "Exceed Learning Center Video", start: 2 },
-              ].map((video) => (
-                <div key={video.id} className="relative group">
-                  <div className="aspect-video rounded-3xl overflow-hidden shadow-2xl bg-white border-8 border-white">
-                    <iframe
-                      className="w-full h-full"
-                      src={`https://www.youtube.com/embed/${video.id}${video.start ? `?start=${video.start}` : ""}`}
-                      title={video.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      loading="lazy"
-                    ></iframe>
-                  </div>
-                  <noscript>
-                    <p className="mt-4 text-sm text-gray-500 text-center font-medium">
-                      Your browser blocks third-party cookies. Please enable them to view this video.
-                    </p>
-                  </noscript>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
 
@@ -474,11 +452,11 @@ function App() {
           </div>
 
           <div className="mt-12 pt-8 border-t border-white/10">
-            <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6 mb-8">
+            <div className="flex flex-col items-center gap-4 mb-8">
               <div className="w-16 h-16 rounded-full bg-[#ca3433] flex items-center justify-center border-4 border-white/10 shrink-0 shadow-lg">
                 <Calendar className="w-8 h-8 text-white" />
               </div>
-              <div>
+              <div className="text-center">
                 <p className="text-xs font-black uppercase tracking-widest text-white mb-3">CENTER HOURS:</p>
                 <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-8 gap-y-1 text-sm text-white/80">
                   {centerHoursData.map((item, idx) => (
