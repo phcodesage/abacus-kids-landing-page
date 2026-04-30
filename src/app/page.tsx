@@ -330,7 +330,7 @@ function App() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col">
               <div className="relative aspect-[4/3] overflow-hidden">
-                <img src="/images/hero-image.jpg" alt="Abacus Mental Math" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <img src="/images/abacus-images/6L9A0724.jpeg" alt="Abacus Mental Math" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 <div className="absolute bottom-0 right-6 translate-y-1/2 bg-[#ca3433] p-4 rounded-lg shadow-lg">
                   <Calculator className="w-6 h-6 text-white" />
                 </div>
@@ -353,7 +353,7 @@ function App() {
 
             <div className="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col">
               <div className="relative aspect-[4/3] overflow-hidden">
-                <img src="/images/hero-image.jpg" alt="After School Programs" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <img src="/images/abacus-images/6L9A0759.jpg" alt="After School Programs" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 <div className="absolute bottom-0 right-6 translate-y-1/2 bg-[#ca3433] p-4 rounded-lg shadow-lg">
                   <Brain className="w-6 h-6 text-white" />
                 </div>
@@ -364,6 +364,29 @@ function App() {
                 </h3>
                 <p className="text-[#0e1f3e]/70 leading-relaxed mb-6 flex-1">
                   Our after-school programs provide a nurturing environment for elementary school students (K-5) to reinforce their academic foundation, explore creative pursuits, &amp; develop essential life skills in a supportive community setting.
+                </p>
+                <a href="#" className="inline-flex items-center gap-2 text-[#ca3433] font-bold hover:underline group/link">
+                  <div className="bg-[#ca3433] rounded-full p-1 text-white group-hover/link:scale-110 transition-transform">
+                    <ArrowRight className="w-3 h-3" />
+                  </div>
+                  Learn More
+                </a>
+              </div>
+            </div>
+
+            <div className="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col">
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <img src="/images/abacus-images/6L9A0761.jpg" alt="Boost Skills at Early Age" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute bottom-0 right-6 translate-y-1/2 bg-[#ca3433] p-4 rounded-lg shadow-lg">
+                  <Target className="w-6 h-6 text-white" />
+                </div>
+              </div>
+              <div className="p-8 pt-12 flex-1 flex flex-col">
+                <h3 className="font-heading text-2xl font-bold text-[#0e1f3e] mb-4">
+                  Boost Skills at Early Age
+                </h3>
+                <p className="text-[#0e1f3e]/70 leading-relaxed mb-6 flex-1">
+                  The earlier kids start, the greater the advantage. Our program builds a strong mathematical foundation during the most critical years of brain development, setting children up for lifelong academic success.
                 </p>
                 <a href="#" className="inline-flex items-center gap-2 text-[#ca3433] font-bold hover:underline group/link">
                   <div className="bg-[#ca3433] rounded-full p-1 text-white group-hover/link:scale-110 transition-transform">
