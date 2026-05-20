@@ -20,7 +20,7 @@ import PaymentModal, { calcCardPrice } from "./PaymentModal";
 function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const STRIPE_LINK = "https://buy.stripe.com/8x2eV6cWw9se7K11ObdfG03";
+  const STRIPE_LINK = "https://securelink-prod.valorpaytech.com:4430/?redirect=1&uid=6dec5ec8-5303-11f1-a8e1-12a0879a85b1";
   const CASH_PRICE = "$350";
 
   // Store Lenis instance so PaymentModal can stop/start it
