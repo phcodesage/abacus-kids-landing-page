@@ -13,11 +13,64 @@ import {
   MapPin,
   Mail,
   ChevronUp,
+  Play,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import PaymentModal, { calcCardPrice } from "./PaymentModal";
 
+const abacusVideos = [
+  {
+    id: "1FaTaqDeSI3tSU57lzoLuVgglcEpE-uoK",
+    title: "POV: Learning Abacus",
+    description: "Experience a first-person view of how students interact with the abacus to visualize math.",
+    type: "drive",
+  },
+  {
+    id: "G921Q3E4E9s",
+    title: "Exceed Learning Center Video",
+    description: "See our overall programs and interactive abacus classes at Exceed Learning Center.",
+    type: "youtube",
+  },
+  {
+    id: "1sfajIjAazBC--TlK_FVt5nWuOft0n7eR",
+    title: "Abacus Practice Session 1",
+    description: "Watch our students build concentration and speed through guided abacus arithmetic.",
+    type: "drive",
+  },
+  {
+    id: "1pInhdP9ncCMv5u0OCGrnQVOibdrFSsl8",
+    title: "Abacus Practice Session 2",
+    description: "Students work on intermediate mathematical problems with rhythm and accuracy.",
+    type: "drive",
+  },
+  {
+    id: "1L_tPofIAUJNVGDr40NBlWeu2mmVSOBKc",
+    title: "Student Speed Calculation",
+    description: "Witness lightning-fast mental calculations performed entirely from memory visualization.",
+    type: "drive",
+  },
+  {
+    id: "1aWKcIU17wRzivX31aJJG3sVFq1wbrCd8",
+    title: "Mental Math Mastery 1",
+    description: "Young learners demonstrating incredible computational skills without physical tools.",
+    type: "drive",
+  },
+  {
+    id: "1_6Y_PY-c3wfniGE3ew9RBRu8yw6W5u3F",
+    title: "Mental Math Mastery 2",
+    description: "Advanced math calculations executed mentally with flawless accuracy and focus.",
+    type: "drive",
+  },
+  {
+    id: "1aRsWgm6pgYUIeeyb-GATqthk1Ec38KnO",
+    title: "Interactive Math Lesson",
+    description: "An engaging classroom session showcasing interactive, group-based abacus training.",
+    type: "drive",
+  },
+];
+
 function App() {
+  const [activeVideo, setActiveVideo] = useState(abacusVideos[0]);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const STRIPE_LINK = "https://securelink-prod.valorpaytech.com:4430/?redirect=1&uid=6dec5ec8-5303-11f1-a8e1-12a0879a85b1";
@@ -108,7 +161,7 @@ function App() {
                 />
               </div>
             </div>
-            <h1 className="font-heading text-6xl sm:text-7xl lg:text-8xl font-black text-white mb-6 tracking-tighter">
+            <h1 className="font-heading text-5xl sm:text-7xl lg:text-8xl font-black text-white mb-6 tracking-tighter">
               ABACUS
             </h1>
             <div className="flex items-center justify-center gap-2 mb-8">
@@ -154,36 +207,108 @@ function App() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="font-heading text-4xl sm:text-5xl font-black text-[#0e1f3e] mb-4">
-              Abacus Videos
+              Abacus Video Gallery
             </h2>
             <p className="text-xl text-[#0e1f3e]/70 max-w-2xl mx-auto font-medium">
-              See our students in action and learn about the benefits of abacus training.
+              See our students in action and witness the power of mental math training.
             </p>
           </div>
 
-          <div className="flex justify-center">
-            <div className="w-full max-w-5xl">
-              {[
-                { id: "G921Q3E4E9s", title: "Exceed Learning Center Video", start: 2 },
-              ].map((video) => (
-                <div key={video.id} className="relative group">
-                  <div className="aspect-video rounded-3xl overflow-hidden shadow-2xl bg-white border-8 border-white">
-                    <iframe
-                      className="w-full h-full"
-                      src={`https://www.youtube.com/embed/${video.id}${video.start ? `?start=${video.start}` : ""}`}
-                      title={video.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      loading="lazy"
-                    ></iframe>
-                  </div>
-                  <noscript>
-                    <p className="mt-4 text-sm text-gray-500 text-center font-medium">
-                      Your browser blocks third-party cookies. Please enable them to view this video.
-                    </p>
-                  </noscript>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Main Player Component */}
+            <div className="lg:col-span-2 space-y-4">
+              <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black border-4 border-white">
+                <iframe
+                  className="w-full h-full"
+                  src={
+                    activeVideo.type === "youtube"
+                      ? `https://www.youtube.com/embed/${activeVideo.id}?start=2`
+                      : `https://drive.google.com/file/d/${activeVideo.id}/preview`
+                  }
+                  title={activeVideo.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy"
+                ></iframe>
+              </div>
+              <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-md">
+                <h3 className="font-heading text-2xl font-bold text-[#0e1f3e] mb-2">
+                  {activeVideo.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {activeVideo.description}
+                </p>
+              </div>
+            </div>
+
+            {/* Playlist Component */}
+            <div className="lg:col-span-1">
+              <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-lg flex flex-col h-full max-h-[400px] lg:max-h-[580px]">
+                <h3 className="font-heading text-xl font-bold text-[#0e1f3e] mb-4 pb-2 border-b border-gray-100">
+                  Watch More Videos
+                </h3>
+                <div className="flex-1 overflow-y-auto space-y-3 pr-2 scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent">
+                  {abacusVideos.map((video) => {
+                    const isActive = video.id === activeVideo.id;
+                    const thumbnailSrc =
+                      video.type === "youtube"
+                        ? `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`
+                        : `https://drive.google.com/thumbnail?id=${video.id}&sz=w600`;
+
+                    return (
+                      <button
+                        key={video.id}
+                        onClick={() => {
+                          setActiveVideo(video);
+                          // Scroll to main player on mobile when a video is clicked
+                          if (window.innerWidth < 1024) {
+                            document.getElementById("videos")?.scrollIntoView({ behavior: "smooth" });
+                          }
+                        }}
+                        className={`flex items-center gap-3 w-full p-2.5 rounded-xl border-2 text-left transition-all duration-300 group ${
+                          isActive
+                            ? "bg-[#ca3433]/5 border-[#ca3433] shadow-sm"
+                            : "bg-white border-transparent hover:bg-gray-50 hover:border-gray-100"
+                        }`}
+                      >
+                        {/* Thumbnail */}
+                        <div className="relative w-24 h-16 rounded-lg overflow-hidden shrink-0 bg-gray-100 border border-gray-100">
+                          <img
+                            src={thumbnailSrc}
+                            alt={video.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+                            <Play
+                              className={`w-5 h-5 text-white drop-shadow-md transition-transform ${
+                                isActive ? "scale-110 text-[#ca3433]" : "group-hover:scale-110"
+                              }`}
+                              fill="currentColor"
+                            />
+                          </div>
+                          <span className="absolute top-1 left-1 bg-black/60 text-white text-[8px] px-1 py-0.5 rounded font-bold uppercase tracking-wider">
+                            {video.type === "youtube" ? "YT" : "Drive"}
+                          </span>
+                        </div>
+
+                        {/* Text Details */}
+                        <div className="min-w-0 flex-1">
+                          <p
+                            className={`font-heading text-sm font-bold truncate mb-0.5 ${
+                              isActive ? "text-[#ca3433]" : "text-[#0e1f3e]"
+                            }`}
+                          >
+                            {video.title}
+                          </p>
+                          <p className="text-xs text-gray-500 line-clamp-2 leading-tight">
+                            {video.description}
+                          </p>
+                        </div>
+                      </button>
+                    );
+                  })}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>
@@ -211,7 +336,7 @@ function App() {
                 classroom.
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="bg-gradient-to-br from-[#ca3433]/10 to-[#ca3433]/5 rounded-2xl p-8 border border-[#ca3433]/20 hover:border-[#ca3433]/40 transition-all duration-300">
                 <Brain className="w-12 h-12 text-[#ca3433] mb-4" />
                 <h3 className="font-heading text-xl font-bold text-[#0e1f3e] mb-2">
@@ -256,11 +381,11 @@ function App() {
       {/* Program Details Card */}
       <div id="program" className="relative py-20 sm:py-28 bg-white">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="bg-gradient-to-br from-[#ca3433] to-[#a02828] rounded-3xl p-12 sm:p-16 shadow-2xl overflow-hidden relative">
+          <div className="bg-gradient-to-br from-[#ca3433] to-[#a02828] rounded-3xl p-6 sm:p-16 shadow-2xl overflow-hidden relative">
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
 
             <div className="relative z-10">
-              <h2 className="font-heading text-4xl sm:text-5xl font-black text-white mb-12">
+              <h2 className="font-heading text-3xl sm:text-5xl font-black text-white mb-12">
                 Our Exclusive Program
               </h2>
 
@@ -283,7 +408,7 @@ function App() {
                   <div className="w-full flex justify-center p-4">
                     <button
                       onClick={() => setModalOpen(true)}
-                      className="font-heading inline-flex items-center justify-center gap-3 bg-white text-[#ca3433] font-black text-lg py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg group w-full sm:w-auto sm:min-w-[200px] hover:bg-white/90"
+                      className="font-heading inline-flex items-center justify-center gap-3 bg-white text-[#ca3433] font-black text-base sm:text-lg py-4 px-6 sm:px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg group w-full sm:w-auto sm:min-w-[200px] hover:bg-white/90"
                     >
                       ENROLL NOW — CHOOSE PAYMENT
                       <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
@@ -339,15 +464,9 @@ function App() {
                 <h3 className="font-heading text-2xl font-bold text-[#0e1f3e] mb-4">
                   Abacus Mental Math
                 </h3>
-                <p className="text-[#0e1f3e]/70 leading-relaxed mb-6 flex-1">
+                <p className="text-[#0e1f3e]/70 leading-relaxed flex-1">
                   Unleash the power of the mind with our Abacus Mental Math program. Designed to enhance cognitive skills and mathematical abilities, this engaging and proven method is suitable for students of all ages.
                 </p>
-                <a href="#" className="inline-flex items-center gap-2 text-[#ca3433] font-bold hover:underline group/link">
-                  <div className="bg-[#ca3433] rounded-full p-1 text-white group-hover/link:scale-110 transition-transform">
-                    <ArrowRight className="w-3 h-3" />
-                  </div>
-                  Learn More
-                </a>
               </div>
             </div>
 
@@ -360,17 +479,11 @@ function App() {
               </div>
               <div className="p-8 pt-12 flex-1 flex flex-col">
                 <h3 className="font-heading text-2xl font-bold text-[#0e1f3e] mb-4">
-                  After School Programs K-5
+                  Perfect for ages 4 - 13
                 </h3>
-                <p className="text-[#0e1f3e]/70 leading-relaxed mb-6 flex-1">
-                  Our after-school programs provide a nurturing environment for elementary school students (K-5) to reinforce their academic foundation, explore creative pursuits, &amp; develop essential life skills in a supportive community setting.
+                <p className="text-[#0e1f3e]/70 leading-relaxed flex-1">
+                  Our program is custom-tailored to support cognitive development across key developmental stages—providing foundational number concepts for younger children and advanced mental math strategies for older students.
                 </p>
-                <a href="#" className="inline-flex items-center gap-2 text-[#ca3433] font-bold hover:underline group/link">
-                  <div className="bg-[#ca3433] rounded-full p-1 text-white group-hover/link:scale-110 transition-transform">
-                    <ArrowRight className="w-3 h-3" />
-                  </div>
-                  Learn More
-                </a>
               </div>
             </div>
 
@@ -385,15 +498,9 @@ function App() {
                 <h3 className="font-heading text-2xl font-bold text-[#0e1f3e] mb-4">
                   Boost Skills at Early Age
                 </h3>
-                <p className="text-[#0e1f3e]/70 leading-relaxed mb-6 flex-1">
+                <p className="text-[#0e1f3e]/70 leading-relaxed flex-1">
                   The earlier kids start, the greater the advantage. Our program builds a strong mathematical foundation during the most critical years of brain development, setting children up for lifelong academic success.
                 </p>
-                <a href="#" className="inline-flex items-center gap-2 text-[#ca3433] font-bold hover:underline group/link">
-                  <div className="bg-[#ca3433] rounded-full p-1 text-white group-hover/link:scale-110 transition-transform">
-                    <ArrowRight className="w-3 h-3" />
-                  </div>
-                  Learn More
-                </a>
               </div>
             </div>
 
@@ -416,7 +523,7 @@ function App() {
           </p>
           <button
             onClick={() => setModalOpen(true)}
-            className="font-heading inline-flex items-center gap-3 bg-[#ca3433] hover:bg-[#a02828] text-white font-black text-lg py-6 px-10 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg group"
+            className="font-heading w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#ca3433] hover:bg-[#a02828] text-white font-black text-base sm:text-lg py-4 px-6 sm:py-6 sm:px-10 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg group"
           >
             Enroll Now — Choose Payment
             <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
@@ -466,7 +573,7 @@ function App() {
                 <p className="text-xs font-black uppercase tracking-widest text-white mb-1">EMAIL ADDRESS:</p>
                 <a
                   href="mailto:kidsprograms@exceedlearningcenterny.com?subject=Abacus Inquiry"
-                  className="text-lg font-bold hover:text-[#ca3433] transition-colors underline decoration-1 underline-offset-4 tracking-tight"
+                  className="text-lg font-bold hover:text-[#ca3433] transition-colors underline decoration-1 underline-offset-4 tracking-tight break-all"
                 >
                   kidsprograms@exceedlearningcenterny.com
                 </a>
@@ -479,9 +586,9 @@ function App() {
               <div className="w-16 h-16 rounded-full bg-[#ca3433] flex items-center justify-center border-4 border-white/10 shrink-0 shadow-lg">
                 <Calendar className="w-8 h-8 text-white" />
               </div>
-              <div className="text-center">
+              <div className="text-center w-full max-w-2xl">
                 <p className="text-xs font-black uppercase tracking-widest text-white mb-3">CENTER HOURS:</p>
-                <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-8 gap-y-1 text-sm text-white/80">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-2 text-sm text-white/80">
                   {centerHoursData.map((item, idx) => (
                     <li key={idx} className="flex justify-between gap-4">
                       <span>{item.day}</span>
