@@ -175,10 +175,18 @@ function App() {
               Watch your child&apos;s brain light up as they master numbers using the
               ancient power of the abacus!
             </p>
-            <p className="text-base sm:text-lg text-white/70 max-w-3xl mx-auto mb-12">
+            <p className="text-base sm:text-lg text-white/70 max-w-3xl mx-auto mb-8">
               Lightning-fast calculations • Enhanced memory • Unshakeable
               confidence
             </p>
+            <div className="flex justify-center mb-6">
+              <button
+                onClick={() => setModalOpen(true)}
+                className="bg-[#ca3433] hover:bg-[#b02a29] text-white text-lg sm:text-xl font-extrabold uppercase tracking-widest px-10 py-4 rounded-full shadow-2xl transition-all hover:scale-105"
+              >
+                Enroll Now
+              </button>
+            </div>
           </div>
 
           {/* Hero Image Section */}
